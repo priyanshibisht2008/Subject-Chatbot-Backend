@@ -22,3 +22,17 @@ def read_root():
 @app.get("/api/hello")
 def say_hello():
     return {"message": "Hello from FastAPI backend"}
+
+from pydantic import BaseModel
+
+class User(BaseModel):
+    name: str
+    email: str
+
+@app.post("/api/users")
+def create_user(user: User):
+    return {
+        "status": "success",
+        "name": user.name,
+        "email": user.email
+    }
